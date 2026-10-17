@@ -2,12 +2,11 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from add.config import Config
 from add.locators import SigningLocators, ButtonsLocators
-import pytest
 
 
 class TestLoggingIn:
-    @pytest.mark.parametrize('email, password', [['menshikov_13@gmail.com', '123456']])
-    def test_logging_out_button(self, driver, email, password):
+    def test_logging_out_button(self, driver, credentials):
+        email, password = credentials
         driver.get(Config.URL)
         driver.find_element(*ButtonsLocators.PERSONAL_ACCOUNT_BUTTON).click()
         WebDriverWait(driver, 3).until(

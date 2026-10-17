@@ -38,3 +38,10 @@ def register_page(driver):
     driver.find_element(*ButtonsLocators.REGISTER_INSTEAD_LINK).click()
     WebDriverWait(driver, 15).until(
         expected_conditions.visibility_of_element_located(ButtonsLocators.REGISTER_BUTTON))
+
+
+@pytest.fixture
+def credentials():
+    if not (Config.TEST_EMAIL and Config.TEST_PASSWORD):
+        pytest.skip("Set TEST_EMAIL and TEST_PASSWORD to run login-dependent tests")
+    return Config.TEST_EMAIL, Config.TEST_PASSWORD

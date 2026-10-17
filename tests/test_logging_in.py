@@ -2,12 +2,11 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from add.config import Config
 from add.locators import ButtonsLocators, SigningLocators
-import pytest
 
 
 class TestLoggingIn:
-    @pytest.mark.parametrize('email, password', [['alexandermenshikov13777@yandex.ru', '123456']])
-    def test_enter_account_button(self, driver, email, password):
+    def test_enter_account_button(self, driver, credentials):
+        email, password = credentials
         driver.get(Config.URL)
         driver.find_element(*ButtonsLocators.ENTER_ACCOUNT_BUTTON).click()
         WebDriverWait(driver, 3).until(
@@ -23,9 +22,8 @@ class TestLoggingIn:
             expected_conditions.visibility_of_element_located(ButtonsLocators.MAKE_ORDER_BUTTON))
 
         assert make_order_button.is_displayed()
-
-    @pytest.mark.parametrize('email, password', [['alexandermenshikov13777@yandex.ru', '123456']])
-    def test_personal_account_button(self, driver, email, password):
+    def test_personal_account_button(self, driver, credentials):
+        email, password = credentials
         driver.get(Config.URL)
         driver.find_element(*ButtonsLocators.PERSONAL_ACCOUNT_BUTTON).click()
         WebDriverWait(driver, 3).until(
@@ -41,9 +39,8 @@ class TestLoggingIn:
             expected_conditions.visibility_of_element_located(ButtonsLocators.MAKE_ORDER_BUTTON))
 
         assert make_order_button.is_displayed()
-
-    @pytest.mark.parametrize('email, password', [['alexandermenshikov13777@yandex.ru', '123456']])
-    def test_registration_form_button(self, driver, email, password):
+    def test_registration_form_button(self, driver, credentials):
+        email, password = credentials
         driver.get(Config.URL)
         driver.find_element(*ButtonsLocators.ENTER_ACCOUNT_BUTTON).click()
         driver.find_element(*ButtonsLocators.REGISTER_INSTEAD_LINK).click()
@@ -61,9 +58,8 @@ class TestLoggingIn:
             expected_conditions.visibility_of_element_located(ButtonsLocators.MAKE_ORDER_BUTTON))
 
         assert make_order_button.is_displayed()
-
-    @pytest.mark.parametrize('email, password', [['alexandermenshikov13777@yandex.ru', '123456']])
-    def test_password_restore_form_button(self, driver, email, password):
+    def test_password_restore_form_button(self, driver, credentials):
+        email, password = credentials
         driver.get(Config.URL)
         driver.find_element(*ButtonsLocators.PERSONAL_ACCOUNT_BUTTON).click()
         driver.find_element(*ButtonsLocators.PASSWORD_RESTORE_BUTTON).click()
