@@ -77,6 +77,14 @@ BASE_URL=https://example.com pytest
 
 Default values are listed in `.env.example`.
 
+Login-dependent tests use a test account taken from environment variables:
+
+```bash
+TEST_EMAIL=your_test_account@example.com TEST_PASSWORD=your_test_password pytest
+```
+
+If they are not set, these tests are skipped with a clear reason. Credentials are never stored in the repository.
+
 ## External environment availability
 
 The test suite depends on an external public demo environment.
